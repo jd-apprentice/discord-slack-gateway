@@ -2,7 +2,7 @@ const WebSocket = require('ws');
 const { WebhookClient } = require('discord.js');
 const { IncomingWebhook } = require('@slack/webhook');
 const { App } = require('@slack/bolt');
-const { Logger } = require('./utils.js');
+const { Logger, IsBot } = require('./utils.js');
 
 /**
  * @author Jonathan Dyallo
@@ -63,15 +63,15 @@ class DiscordSlackGateway {
         });
 
         this._discordSocket.on('message', (data) => {
-            Logger('Received message from Discord');
-
             const payload = JSON.parse(data);
             const channelId = payload.d.channel_id;
             const isSameChannel = payload.t === 'MESSAGE_CREATE' && channelId === this._options.discord.channelId;
 
-            if (isSameChannel) {
-                const { d } = payload;
+            if (IsBot(payload)) return;
 
+            if (isSameChannel) {
+
+                const { d } = payload;
                 const { global_name } = d.author;
                 const { content } = d;
 
@@ -90,12 +90,14 @@ class DiscordSlackGateway {
         })
 
         this._slackSocket.event('message', async ({ event }) => {
-            Logger('Received message from Slack');
 
             const { channel } = event;
             const isSameChannel = channel === this._options.slack.channelId;
 
+            if (IsBot(event)) return;
+
             if (isSameChannel) {
+
                 const { user, text } = event;
                 const info = await this._slackSocket.client.users.info({ user });
 
@@ -107,7 +109,6 @@ class DiscordSlackGateway {
     }
 
     async _sendSlackMessage(message) {
-        Logger('Sending message to Slack');
         try {
             await this._slackWebhook.send({
                 text: message,
@@ -119,7 +120,6 @@ class DiscordSlackGateway {
     }
 
     async _sendDiscordMessage(message) {
-        Logger('Sending message to Discord');
         try {
             await this._discordWebhook.send(message);
         } catch (error) {

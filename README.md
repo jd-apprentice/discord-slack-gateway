@@ -34,16 +34,25 @@ _I highly recommend using socket mode for Slack. It is much faster than the Even
 ## What are the options?
 
 ### Slack
+
 **signingToken** - Slack signing token. Read https://api.slack.com/authentication/verifying-requests-from-slack
+
 **token** - Slack bot token. Read https://api.slack.com/authentication/token-types
+
 **appToken** - Slack app token. Read https://api.slack.com/authentication/token-types
+
 **channelId** - Slack channel id to listen to
+
 **webhookUrl** - Slack webhook url. Read https://api.slack.com/messaging/webhooks
+
 **socketMode** - Socket mode is a new way for apps to be installed to workspaces. Read https://api.slack.com/apis/connections/socket
 
 ### Discord
+
 **webhookUrl** - Discord webhook url generated from post method in https://discohook.org/
+
 **channelId** - Discord channel id to listen to
+
 **apiToken** - Discord api token generated from https://discord.com/developers/applications
 
 ### LICENSE

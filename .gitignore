@@ -3,3 +3,4 @@ config.json
 example.js
 *lock.json
 demo.js
+.npmrc

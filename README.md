@@ -10,6 +10,14 @@ This is a gateway between Discord and Slack. It allows you to send messages from
 
 ## How to use it?
 
+### Installation
+
+```
+npm i discord-slack-gateway
+```
+
+### Example
+
 ```js
 const { DiscordSlackGateway } = require('discord-slack-gateway');
 const gateway = new DiscordSlackGateway({

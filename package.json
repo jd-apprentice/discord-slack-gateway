@@ -1,0 +1,28 @@
+{
+  "name": "discord-slack-gateway",
+  "version": "0.1.0",
+  "description": "",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js",
+    "example": "nodemon src/example.js"
+  },
+  "keywords": [
+    "discord",
+    "slack",
+    "bot"
+  ],
+  "author": "Jonathan Dyallo",
+  "license": "MIT",
+  "dependencies": {
+    "@slack/bolt": "^3.13.1",
+    "@slack/rtm-api": "^6.1.0",
+    "@slack/webhook": "^6.1.0",
+    "axios": "^1.4.0",
+    "discord.js": "^14.11.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.22"
+  }
+}

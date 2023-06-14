@@ -6,6 +6,8 @@ Image from [HERE](https://venngage.com/blog/discord-integrations/)
 
 ## What is this?
 
+![image](https://github.com/jd-apprentice/discord-slack-gateway/assets/68082746/a65751ae-885f-4d9e-9d4c-d911f4f815e3)
+
 This is a gateway between Discord and Slack. It allows you to send messages from Discord to Slack and vice versa.
 
 ## How to use it?

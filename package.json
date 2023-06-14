@@ -7,9 +7,7 @@
     "discord-slack-gateway": "src/index.js"
   },
   "scripts": {
-    "start": "node src/index.js",
-    "dev": "nodemon src/index.js",
-    "demo": "node demo.js"
+    "start": "node src/index.js"
   },
   "keywords": [
     "discord",

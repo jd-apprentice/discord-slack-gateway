@@ -31,6 +31,7 @@ const { Logger, IsBot } = require('./utils.js');
  * @param {string} appToken - Slack app token read https://api.slack.com/authentication/token-types#granular_bot
  * @param {string} channelId - Slack channel id to listen to
  * @param {string} webhookUrl - Slack webhook url read https://api.slack.com/messaging/webhooks
+ * @param {boolean} socketMode - Slack socket mode read https://api.slack.com/apis/connections/socket
  * @param {Object} discord - Discord options
  * @param {string} webhookUrl - Discord webhook url generated from post method in https://discohook.org/
  * @param {string} channelId - Discord channel id to listen to
@@ -47,7 +48,7 @@ class DiscordSlackGateway {
             token: this._options.slack.token,
             signingSecret: this._options.slack.signingToken,
             appToken: this._options.slack.appToken,
-            socketMode: this._options.slack.socketMode,
+            socketMode: this._options.slack.socketMode || true,
         });
     }
 

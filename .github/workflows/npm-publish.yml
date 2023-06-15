@@ -16,23 +16,23 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 16
-      - run: npm i
+    - name: checkout repository
+      uses: actions/checkout@v3
+ 
+    - name: setup node
+      uses: actions/setup-node@v3
+      with:
+        node-version: 16
+        registry-url: https://registry.npmjs.org
+ 
+    - name: install dependencies
+      run: npm ci
+ 
+    - name: build package
+      run: npm run build
+ 
+    - name: publish package npm
+      run: npm publish --access public
+      env:
+        NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
 
-  publish-npm:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 16
-          registry-url: https://registry.npmjs.org
-      - run: npm i
-      - run: npm set //registry.npmjs.org/:_authToken=${NODE_AUTH_TOKEN}
-      - run: npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{secrets.npm_token}}

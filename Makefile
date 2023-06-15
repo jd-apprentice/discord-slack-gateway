@@ -1,3 +1,6 @@
+build:
+	npm run build
+
 dev:
 	nodemon ./src/index.js
 

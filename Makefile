@@ -9,3 +9,9 @@ demo:
 
 publish:
 	npm publish
+
+call_function:
+	node ./src/utils.js $(function)
+
+bump:
+	make call_function function=BumpVersion

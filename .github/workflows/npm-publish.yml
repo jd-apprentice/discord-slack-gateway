@@ -24,13 +24,6 @@ jobs:
       with:
         node-version: 16
         registry-url: https://registry.npmjs.org
-
-    - name: Lint Action
-      uses: wearerequired/lint-action@v2
-      with:
-        eslint: true
-        prettier: true
-        autoFix: true
  
     - name: install dependencies
       run: npm ci

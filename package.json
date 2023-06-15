@@ -2,12 +2,15 @@
   "name": "discord-slack-gateway",
   "version": "0.1.0",
   "description": "A gateway between Discord and Slack",
-  "main": "src/index.js",
+  "source": "src/index.js",
+  "main": "dist/index.js",
   "bin": {
     "discord-slack-gateway": "src/index.js"
   },
   "scripts": {
-    "start": "node src/index.js"
+    "start": "node dist/index.js",
+    "watch": "parcel watch",
+    "build": "parcel build src/index.js"
   },
   "keywords": [
     "discord",
@@ -25,9 +28,11 @@
     "@slack/bolt": "^3.13.1",
     "@slack/webhook": "^6.1.0",
     "axios": "^1.4.0",
-    "discord.js": "^14.11.0"
+    "discord.js": "^14.11.0",
+    "ws": "^8.4.0"
   },
   "devDependencies": {
-    "nodemon": "^2.0.22"
+    "nodemon": "^2.0.22",
+    "parcel": "^2.9.2"
   }
 }

@@ -3,3 +3,5 @@ config.json
 example.js
 demo.js
 .npmrc
+*-cache
+dist/

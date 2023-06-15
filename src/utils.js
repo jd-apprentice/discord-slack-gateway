@@ -1,4 +1,5 @@
 const fs = require("fs");
+// const axios = require("axios");
 
 function Logger(message) {
     console.log(`[${new Date().toLocaleString()}] ${message}`);
@@ -7,6 +8,10 @@ function Logger(message) {
 function IsBot(payload) {
     if (payload?.d?.author?.bot) return true;
     if (payload?.subtype === "bot_message") return true;
+}
+
+function HasUrl(payload) {
+    if (payload?.d?.attachments) return payload?.d?.attachments?.map((attachment) => attachment?.url).join(" ");
 }
 
 function BumpVersion() {
@@ -38,6 +43,10 @@ function BumpVersion() {
     });
 }
 
+function UploadPicture(url) {
+    // TODO: Manage picture from slack to discord
+}
+
 // Read arguments
 if (process.argv[2] === 'BumpVersion') {
     BumpVersion();
@@ -46,5 +55,7 @@ if (process.argv[2] === 'BumpVersion') {
 module.exports = {
     Logger,
     IsBot,
-    BumpVersion
+    BumpVersion,
+    HasUrl,
+    UploadPicture
 };

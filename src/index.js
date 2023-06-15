@@ -32,7 +32,7 @@ const WebSocket = require('ws');
 const { WebhookClient } = require('discord.js');
 const { IncomingWebhook } = require('@slack/webhook');
 const { App } = require('@slack/bolt');
-const { Logger, IsBot } = require('./utils.js');
+const { Logger, IsBot, HasUrl } = require('./utils.js');
 
 /**
  * @author Jonathan Dyallo
@@ -92,11 +92,13 @@ class DiscordSlackGateway {
         });
 
         this._discordSocket.on('message', (data) => {
+            if (IsBot(JSON.parse(data))) return;
+
             const payload = JSON.parse(data);
             const channelId = payload.d.channel_id;
             const isSameChannel = payload.t === 'MESSAGE_CREATE' && channelId === this._options.discord.channelId;
 
-            if (IsBot(payload)) return;
+            const url = HasUrl(payload);
 
             if (isSameChannel) {
 
@@ -104,7 +106,7 @@ class DiscordSlackGateway {
                 const { global_name } = d.author;
                 const { content } = d;
 
-                this._sendSlackMessage(`*${global_name}*: ${content}`);
+                this._sendSlackMessage(`*${global_name}*: ${content} ${url ?? ""}`);
             }
         });
 
@@ -119,11 +121,10 @@ class DiscordSlackGateway {
         })
 
         this._slackSocket.event('message', async ({ event }) => {
+            if (IsBot(event)) return;
 
             const { channel } = event;
             const isSameChannel = channel === this._options.slack.channelId;
-
-            if (IsBot(event)) return;
 
             if (isSameChannel) {
 
@@ -135,6 +136,10 @@ class DiscordSlackGateway {
                 this._sendDiscordMessage(`**${display_name}**: ${text}`);
             }
         })
+
+        this._slackSocket.event('error', (error) => {
+            console.error('Error in the socket connection: ', error);
+        });
     }
 
     async _sendSlackMessage(message) {

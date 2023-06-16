@@ -1,6 +1,6 @@
 {
   "name": "discord-slack-gateway",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "A gateway between Discord and Slack",
   "main": "src/index.js",
   "bin": {
